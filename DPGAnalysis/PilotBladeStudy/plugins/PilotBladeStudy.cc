@@ -112,7 +112,7 @@ void PilotBladeStudy::beginJob() {
   
   if (iConfig_.exists("cosmicsCase")) {
     cosmicsCase_=iConfig_.getParameter<bool>("cosmicsCase");
-    std::cout<<"This is a Cosmics run "<<std::endl;
+    if (cosmicsCase_) std::cout<<"This is a Cosmics run: " <<std::endl;
   }
   
   if (iConfig_.exists("triggerTag")) {
@@ -572,10 +572,10 @@ void PilotBladeStudy::analyzeDigis(const edm::Event& iEvent,
       ModuleData module = getModuleData(detId.rawId(), federrors);
       ModuleData module_on = getModuleData(detId.rawId(), federrors, "online");
 
-      if (verbosity) std::cout << "Looping on the digi sets " << std::endl;
+      if (verbosity>2) std::cout << "Looping on the digi sets " << std::endl;
       if (cosmicsCase==true && verbosity)  std::cout << "This is a Cosmics case -- we save everything" << std::endl;
       if (subDetId!=PixelSubdetector::PixelEndcap && subDetId!=PixelSubdetector::PixelBarrel && cosmicsCase==false) {
-        if (verbosity>1) std::cout << "Not a pixel digi -- skipping the event" << std::endl;
+        if (nty>1) std::cout << "Not a pixel digi -- skipping the event" << std::endl;
         continue;
       }
       // Take only the FPIX- pixel digis
@@ -584,7 +584,7 @@ void PilotBladeStudy::analyzeDigis(const edm::Event& iEvent,
         continue;
       }
       
-      if (module_on.disk==-3 && (verbosity)) std::cout << "Pilot Blade digi: " << std::endl;
+      if (module_on.disk==-3 && (verbosity>2)) std::cout << "Pilot Blade digi: " << std::endl;
       edm::DetSet<PixelDigi>::const_iterator itDigi=itDigiSet->begin();
       for(; itDigi!=itDigiSet->end(); ++itDigi) {
         Digi digi;
@@ -595,7 +595,7 @@ void PilotBladeStudy::analyzeDigis(const edm::Event& iEvent,
         digi.mod=module;
         digi.mod_on=module_on;
         digis_.push_back(digi);
-        if (verbosity) {
+        if (verbosity>1) {
           std::cout<<"\t#"<<digi.i<<" adc: "<<digi.adc<<" at col:"<<digi.col<<", row:"<<digi.row<<")";
           std::cout<<std::endl;
         }

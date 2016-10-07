@@ -267,8 +267,8 @@ void PilotBladeStudy::analyze(const edm::Event& iEvent, const edm::EventSetup& i
   // --------------------- Analyze trajectories --------------------
   analyzeTrajs(iEvent, iSetup, trajTrackCollToken_, federrors, 0, cosmicsCase_); 
   std::cout << "Number of PB Hits: " << nPBHit << " out of " 
-	    << nPixelHit << " Pixel hit and " << nStripHit
-	    << " Strip hit in the events so far. " << std::endl;
+  	    << nPixelHit << " Pixel hit and " << nStripHit
+  	    << " Strip hit in the events so far. " << std::endl;
   // ---------------------------------------------------------------
     
   // ---------------------- Filling the trees ----------------------
@@ -564,7 +564,7 @@ void PilotBladeStudy::analyzeDigis(const edm::Event& iEvent,
   } else {
     const edm::DetSetVector<PixelDigi>& digiCollection = *digiCollectionHandle;
     edm::DetSetVector<PixelDigi>::const_iterator itDigiSet =  digiCollection.begin();
-
+	if (verbosity>2) std::cout << "Looping on the itDigiSet " << std::endl;
     for (; itDigiSet!=digiCollection.end(); itDigiSet++) {
       DetId detId(itDigiSet->detId());
       unsigned int subDetId=detId.subdetId();
@@ -575,7 +575,7 @@ void PilotBladeStudy::analyzeDigis(const edm::Event& iEvent,
       if (verbosity>2) std::cout << "Looping on the digi sets " << std::endl;
       if (cosmicsCase==true && verbosity)  std::cout << "This is a Cosmics case -- we save everything" << std::endl;
       if (subDetId!=PixelSubdetector::PixelEndcap && subDetId!=PixelSubdetector::PixelBarrel && cosmicsCase==false) {
-        if (nty>1) std::cout << "Not a pixel digi -- skipping the event" << std::endl;
+        if (verbosity>1) std::cout << "Not a pixel digi -- skipping the event" << std::endl;
         continue;
       }
       // Take only the FPIX- pixel digis
@@ -584,7 +584,7 @@ void PilotBladeStudy::analyzeDigis(const edm::Event& iEvent,
         continue;
       }
       
-      if (module_on.disk==-3 && (verbosity>2)) std::cout << "Pilot Blade digi: " << std::endl;
+      if (module_on.disk==-3 && (verbosity)) std::cout << "Pilot Blade digi: " << std::endl;
       edm::DetSet<PixelDigi>::const_iterator itDigi=itDigiSet->begin();
       for(; itDigi!=itDigiSet->end(); ++itDigi) {
         Digi digi;
@@ -595,7 +595,7 @@ void PilotBladeStudy::analyzeDigis(const edm::Event& iEvent,
         digi.mod=module;
         digi.mod_on=module_on;
         digis_.push_back(digi);
-        if (verbosity>1) {
+        if (verbosity) {
           std::cout<<"\t#"<<digi.i<<" adc: "<<digi.adc<<" at col:"<<digi.col<<", row:"<<digi.row<<")";
           std::cout<<std::endl;
         }
@@ -741,6 +741,8 @@ void PilotBladeStudy::analyzeTracks(const edm::Event& iEvent,
       track_.dz  = track.dz();
       track_.eta = track.eta();
       track_.phi = track.phi();
+      track_.highPurity= (track.quality(reco::TrackBase::highPurity)) ? 1 : 0;
+	  
       
       std::vector<TrajectoryMeasurement> trajMeasurements = traj.measurements();
       std::vector<TrajectoryMeasurement>::const_iterator itTraj;

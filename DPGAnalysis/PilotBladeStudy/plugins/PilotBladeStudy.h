@@ -272,6 +272,7 @@ class PilotBladeStudy : public edm::EDAnalyzer
     float dz;
     float eta;
     float phi;
+	int highPurity;
 
     std::string list;
    
@@ -284,8 +285,9 @@ class PilotBladeStudy : public edm::EDAnalyzer
       dz=NOVAL_F;      
       eta=NOVAL_F;
       phi=NOVAL_F;
+	  highPurity=NOVAL_I;
 
-      list="nPixelHit/I:nStripHit/I:pt/F:dxy/F:dz/F:eta/F:phi/F";
+      list="nPixelHit/I:nStripHit/I:pt/F:dxy/F:dz/F:eta/F:phi/F:highPurity/I";
     }
   };
 

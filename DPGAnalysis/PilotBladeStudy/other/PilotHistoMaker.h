@@ -93,6 +93,7 @@ class TTree;
     float dz;
     float eta;
     float phi;
+	int highPurity;
 
     std::string list;
    
@@ -105,8 +106,9 @@ class TTree;
       dz=NOVAL_F;      
       eta=NOVAL_F;
       phi=NOVAL_F;
+	  highPurity=NOVAL_I;
 
-      list="nPixelHit/I:nStripHit/I:pt/F:dxy/F:dz/F:eta/F:phi/F";
+      list="nPixelHit/I:nStripHit/I:pt/F:dxy/F:dz/F:eta/F:phi/F:highPurity/I";
     }
   };
 
@@ -396,23 +398,6 @@ class TTree;
     clust_.clear();
     digis_.clear();
   }
-
-  
-// void th1PlotCreator(TH1* h, std::string canname, int gx = 0, int gy = 0,
-//                      int histosize_x = 500, int histosize_y = 500,
-//                      int mar_left = 80, int mar_right = 20, int mar_top = 20, int mar_bottom = 60,
-//                      int title_align = 33, float title_x = 1.0, float title_y = 1.0,
-//                      bool save=0) {
-//   
-//   std::string save_dir = "./";
-//   const char* format = ".png";
-//   
-//   TCanvas *c;
-//   c = custom_can_(h, canname, gx,gy,     histosize_x,histosize_y, mar_left,mar_right,     mar_top,mar_bottom,   title_align,title_x, title_y);
-//   h->Draw();
-//   gPad->Update(); 
-//   if (save) c->SaveAs((save_dir+std::string(c->GetName())+format).c_str());
-// }
 
   // ---------------------------------------------------------------------
   // ---------------------------------------------------------------------

@@ -225,6 +225,17 @@ int delay(uint run, const uint ls) {
   if (run==282095) {delay=100; return delay; }
   if (run==282096) {delay=50; return delay; }
 
+  if (run==282650) {
+	//Physics_p99ns_p74ns_6 - start LS 05 - end 22
+	//Physics_p49ns_p24ns_6 - start LS 24 - end 40
+	//Physics_p24ns_m1ns_6  - start LS 43 - end 56
+	//Physics_p124ns_p99ns_6 - start LS 58 - end 74
+    if (ls<22)  { delay=99; return delay; }
+    if (ls<40)  { delay=49; return delay; }
+    if (ls<56)  { delay=24; return delay; }
+	else		{ delay=124; return delay;}
+  }
+
   return delay;
 }
 

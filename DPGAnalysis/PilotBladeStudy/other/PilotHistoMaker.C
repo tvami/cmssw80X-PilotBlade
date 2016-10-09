@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 #include "PilotHistoMaker.h"
-#include "/data/vami/projects/pilotBlade/uTCA-data/PilotHistoMakerDelays.h"
+#include "/data/vami/projects/pilotBlade/PilotHistoMakerDelays.h"
 //#include "PilotHistoMakerDelays.h"
 
 std::string name(int detid) {

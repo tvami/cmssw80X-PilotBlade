@@ -45,8 +45,8 @@ CablingMapDBReader = cms.ESSource("PoolDBESSource",
       record = cms.string('SiPixelFedCablingMapRcd'),
       label = cms.untracked.string('pilotBlade'), 
       #tag = cms.string('SiPixelFedCablingMap_data'), #tagname for the local DB
-      tag = cms.string('SiPixelCabling_PilotBlade_data_v1'),  
-      #tag = cms.string('SiPixelFedCablingMap_FED1240_v1'),  
+      #tag = cms.string('SiPixelCabling_PilotBlade_data_v1'),  
+      tag = cms.string('SiPixelFedCablingMap_FED1240_v2'),  
     )
   )
 )

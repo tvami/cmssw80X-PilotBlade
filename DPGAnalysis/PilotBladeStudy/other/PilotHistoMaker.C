@@ -741,6 +741,6 @@ int main(int argc, char* argv[]) {
 
 
   //digis(saveAll, save_dir, format, filechain);
-  clusters(saveAll, save_dir, format, filechain);
-  rechits(saveAll, save_dir, format, filechain);
+  clusters(saveAll, "./clusters/", format, filechain);
+  rechits(saveAll, "./rechits/", format, filechain);
 }

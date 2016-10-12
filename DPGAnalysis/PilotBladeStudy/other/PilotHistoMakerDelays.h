@@ -177,33 +177,30 @@ int delay(uint run, const uint ls) {
   if (run>279864 && run<281602) {delay=62; return delay; }
 
   if (run==281602) {
-    if (ls<22)  { delay=49; return delay; }
-    if (ls<43)  { delay=99; return delay; }
-    if (ls<66)  { delay=24; return delay; }
-    if (ls<87)  { delay=124; return delay; }
-    if (ls<107)  { delay=74; return delay; }
+    if (ls<22)  { delay=49; return delay; } //alias:Physics_p49ns_p24ns_6
+    if (ls<43)  { delay=99; return delay; } //alias:Physics_p99ns_p74ns_6
+    if (ls<66)  { delay=24; return delay; } //alias:Physics_p24ns_m1ns_6
+    if (ls<87)  { delay=124; return delay; } //alias:Physics_p124ns_p99ns_6
+    if (ls<107)  { delay=74; return delay; } //alias:Physics_p74ns_p49ns_6
   }
-
+  //2016 October
   if (run==282093) {
-    if (ls<28)  { delay=50; return delay; }
-    if (ls<50)  { delay=75; return delay; }
-    else		{ delay=100; return delay;}
+    if (ls<28)  { delay=74; return delay; } //WBC="0", key:2448, LS: 0-28, BmIWBC:166, BmOWBC:167, alias:Physics_p74ns_p49ns_6 
+    if (ls<50)  { delay=49; return delay; } //WBC="+1", key:2447, LS:28-50, BmIWBC:167, BmOWBC:168, alias:Physics_p49ns_p24ns_6
+    else		{ delay=24; return delay;} //WBC="+2", key:2446, LS:50-, BmIWBC:168, BmOWBC:169, alias:Physics_p24ns_m1ns_6
   }
-  if (run==282094) {delay=75; return delay; }
-  if (run==282095) {delay=100; return delay; }
-  if (run==282096) {delay=50; return delay; }
-	
+  if (run==282094) {delay=49; return delay; } //WBC="+1", key:2447, BmIWBC:167, BmOWBC:168 
+  if (run==282095) {delay=24; return delay; } //WBC="+2", key:2446, BmIWBC:168, BmOWBC:169, alias:Physics_p24ns_m1ns_6
+  if (run==282096) {delay=74; return delay; } //WBC="0", key:2448, BmIWBC:166, BmOWBC:167, alias:Physics_p74ns_p49ns_6
+  
+  if (run==282649) {delay=74; return delay; } //WBC="0", key:2443, BmIWBC:166, BmOWBC:167, alias:Physics_p74ns_p49ns_6
   if (run==282650) {
-	//Physics_p99ns_p74ns_6 - start LS 05 - end 22
-	//Physics_p49ns_p24ns_6 - start LS 24 - end 40
-	//Physics_p24ns_m1ns_6  - start LS 43 - end 56
-	//Physics_p124ns_p99ns_6 - start LS 58 - end 74
-    if (ls<22)  { delay=99; return delay; }
-    if (ls<40)  { delay=49; return delay; }
-    if (ls<56)  { delay=24; return delay; }
-	else		{ delay=124; return delay;}
+    if (ls<22)  { delay=99; return delay; } //WBC="-1", key:2569, BmIWBC:165, BmOWBC:166, LS:  5-22, alias:Physics_p99ns_p74ns_6 
+    if (ls<40)  { delay=49; return delay; } //WBC="+1", key:2565, BmIWBC:167, BmOWBC:168, LS: 24-40, alias:Physics_p49ns_p24ns_6
+    if (ls<56)  { delay=24; return delay; } //WBC="+2", key:2563, BmIWBC:168, BmOWBC:169, LS: 43-56, alias:Physics_p24ns_m1ns_6
+	else		{ delay=124; return delay;} //WBC="-2", key:2571, BmIWBC:164, BmOWBC:165, LS: 58-74, alias:Physics_p124ns_p99ns_6
   }
-
+  if (run==282663) {delay=74; return delay; } //WBC="0", key:????, BmIWBC:166, BmOWBC:167, alias:Physics_p74ns_p49ns_6
 
   return delay;
 }

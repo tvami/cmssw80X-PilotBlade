@@ -5,7 +5,12 @@ cmsenv
 cd -
 make clean
 make -Wsign-compare
-./PilotHistoMaker 
+./PilotHistoMaker
+cd clusters/
 mkdir Cs
 mv *.C Cs/.
-mv Cs/PilotHistoMaker.C .
+cd ..
+cd rechits/
+mkdir Cs
+mv *.C Cs/.
+cd ..

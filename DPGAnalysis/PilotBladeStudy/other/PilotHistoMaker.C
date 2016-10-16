@@ -131,7 +131,6 @@ void digis(bool saveAll, std::string save_dir, const char* format, TChain* filec
       //int run=evt.run-271056;
       //if (run>28) run-=100;
       //Int_t ls=(evt.ls/10)+run*100;
-	  Int_t ls=evt.ls;
       int rawid=module_on.rawid;
       if (module_on.disk==-2) rawid=1;
       
@@ -738,7 +737,7 @@ int main(int argc, char* argv[]) {
   const char* format = ".png";
 
   TChain* filechain = new TChain("filechain");
-  filechain->Add("/data/vami/projects/0RootFiles/2016H/PB-Ntuples/*.root");
+  filechain->Add("/data/vami/projects/0RootFiles/2016H/PB-Ntuples/Runs282650-282649_ZeroBias/*.root");
 
 
   //digis(saveAll, save_dir, format, filechain);

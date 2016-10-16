@@ -350,9 +350,9 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
       if (selectDelay!=-9999 && del!=selectDelay) continue;
 
       if (module_on.disk!=-3 && !(module_on.disk==-2 && (module_on.blade==-10 || module_on.blade==-11)) ) continue;
-      size_t run=evt.run-271056;
-      if (run>28) run-=100;
-      Int_t ls=(evt.ls/10)+run*100;
+      //size_t run=evt.run-271056;
+      //if (run>28) run-=100;
+      //Int_t ls=(evt.ls/10)+run*100;
 
       size_t rawid=module_on.rawid;
       if (module_on.disk==-2) rawid=1;

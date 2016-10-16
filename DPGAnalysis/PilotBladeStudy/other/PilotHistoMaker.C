@@ -127,11 +127,11 @@ void digis(bool saveAll, std::string save_dir, const char* format, TChain* filec
       if (selectDelay!=-9999 && del!=selectDelay) continue;
 
       if (module_on.disk!=-3 && !(module_on.disk==-2 && (module_on.blade==-10 || module_on.blade==-11)) ) continue;
-
+	  if (evt.run!=282650)  continue;
       //int run=evt.run-271056;
       //if (run>28) run-=100;
       //Int_t ls=(evt.ls/10)+run*100;
-
+	  Int_t ls=evt.ls;
       int rawid=module_on.rawid;
       if (module_on.disk==-2) rawid=1;
       
@@ -353,7 +353,8 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
       //size_t run=evt.run-271056;
       //if (run>28) run-=100;
       //Int_t ls=(evt.ls/10)+run*100;
-
+      Int_t ls=evt.ls;
+	  if (evt.run!=282650)  continue;
       size_t rawid=module_on.rawid;
       if (module_on.disk==-2) rawid=1;
       
@@ -598,7 +599,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
       if (del==-9999) continue; 
       if (selectDelay!=-9999 && del!=selectDelay) continue;
 
-
+	  if (evt.run!=282650)  continue;
       //if (evt.run>=272008) continue;
 
       if (module_on.disk!=-3 && !(module_on.disk==-2 && (module_on.blade==-10 || module_on.blade==-11)) ) continue;
@@ -737,12 +738,10 @@ int main(int argc, char* argv[]) {
   const char* format = ".png";
 
   TChain* filechain = new TChain("filechain");
-  filechain->Add("/data/vami/projects/0RootFiles/2016G/PB-Ntuples/Runs281602_ZeroBias/*.root");
-  filechain->Add("/data/vami/projects/0RootFiles/2016H/PB-Ntuples/Runs282649_ZeroBiasAfterIsolatedBunch_Fidu/*.root");
-  filechain->Add("/data/vami/projects/0RootFiles/2016H/PB-Ntuples/Runs282650_ZeroBias/nTuplePilotBlade_All_Fidu2.root");
-  filechain->Add("/data/vami/projects/0RootFiles/2016H/PB-Ntuples/Runs282663_ZeroBias/*.root");
+  filechain->Add("/data/vami/projects/0RootFiles/2016H/PB-Ntuples/*.root");
+
 
   //digis(saveAll, save_dir, format, filechain);
-  //clusters(saveAll, "./clusters/", format, filechain);
+  clusters(saveAll, "./clusters/", format, filechain);
   rechits(saveAll, "./rechits/", format, filechain);
 }

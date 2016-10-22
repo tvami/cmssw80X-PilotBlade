@@ -202,5 +202,16 @@ int delay(uint run, const uint ls) {
   }
   if (run==282663) {delay=74; return delay; } //WBC="0", key:????, BmIWBC:166, BmOWBC:167, alias:Physics_p74ns_p49ns_6
 
+// New Timing scan on 22 October, now the BmO and the BmI are in the same WBC, the delay settings are arbitrary
+  if (run==283834) {delay=65; return delay; } //WBC=168 === WBC="+2"
+  if (run==283835) {
+    if (ls<15)  { delay=90; return delay; }  //WBC=167 === WBC="+1"
+    if (ls<28)  { delay=40; return delay; }  //WBC=169 === WBC="+3"
+    if (ls<41)  { delay=115; return delay; }  //WBC=166 === WBC="0"
+    if (ls<54)  { delay=15; return delay; } //WBC=170 === WBC="+4"
+    if (ls<69)  { delay=140; return delay; }  //WBC=165 === WBC="-1"
+	else		{ delay=65; return delay;}   //WBC=168 === WBC="+2"
+  }
+
   return delay;
 }

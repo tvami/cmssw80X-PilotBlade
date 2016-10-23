@@ -108,11 +108,8 @@ if PB :
 
 # Other statements
 from Configuration.AlCa.GlobalTag import GlobalTag
-#process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_data', '')
-process.GlobalTag = GlobalTag(process.GlobalTag, 
-#  '80X_dataRun2_Prompt_v8_CustomTracker2016B_v0'
- '80X_dataRun2_Prompt_v8'
-  , '')
+process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_data', '')
+#process.GlobalTag = GlobalTag(process.GlobalTag, '80X_dataRun2_Prompt_v8', '')
 
 
 ##----------------------%<------------------

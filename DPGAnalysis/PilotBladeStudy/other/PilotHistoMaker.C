@@ -280,7 +280,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
         PBClustersVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClustersVsDel_%d", uint(detids[imod])),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(uint(detids[imod])).c_str()), 150,0, 150, 0, 100))); vh.push_back(h);
         
         PBClustersVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBClusterAvgNumVsDel_%d", uint(detids[imod])),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(uint(detids[imod])).c_str()), 150,0, 150))); vh.push_back(h);
-        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBClusterNumberVsDel_%d", uint(detids[imod])),  Form("Total number of events vs Delay in %s;Delay;num of events", name(uint(detids[imod])).c_str()), 150,0, 150))); vh.push_back(h);
+        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBCEventNumberVsDel_%d", uint(detids[imod])),  Form("Total number of events vs Delay in %s;Delay;num of events", name(uint(detids[imod])).c_str()), 150,0, 150))); vh.push_back(h);
         
         PBClusterFEDErrVsDel.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrVsDel_%d", uint(detids[imod])),  Form("Fraction of clusters with FED error vs Delay in %s;Delay;Clusters with FED err", name(uint(detids[imod])).c_str()), 150,0, 150))); vh.push_back(h);
         PBClusterFEDErrType.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrType_%d", uint(detids[imod])),  Form("Fraction of clusters with FED error vs Error type in %s;Error type;Cluster fraction", name(uint(detids[imod])).c_str()), 16, 24.5, 40.5))); vh.push_back(h);    
@@ -532,7 +532,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
         PBHitEffVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBHitEffVsDel_%d", detids[imod]),  Form("RecHit efficiency vs Delay in %s;Delay;Efficiency", name(detids[imod]).c_str()), 150, 0, 150))); vh.push_back(h);
         PBHitEffVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBHitNumberVsDel_%d", detids[imod]),  Form("Num of RecHits vs Delay in %s;Delay;Num of hits", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
         PBClustersVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBClustersVsDel_num_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
-        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBClustersVsDel_den_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
+        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBCNumberOfEventsVsDel_den_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
         
         hists.push_back(vh);
     }

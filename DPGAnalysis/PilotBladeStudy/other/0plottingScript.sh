@@ -7,6 +7,10 @@ cd -
 make clean
 make -Wsign-compare
 ./PilotHistoMaker
+cd digis/
+mkdir Cs
+mv *.C Cs/.
+cd ..
 cd clusters/
 mkdir Cs
 mv *.C Cs/.

@@ -202,15 +202,23 @@ int delay(uint run, const uint ls) {
   }
   if (run==282663) {delay=74; return delay; } //WBC="0", key:????, BmIWBC:166, BmOWBC:167, alias:Physics_p74ns_p49ns_6
 
+//miniDAQ Timing scan on 18 October
+  if (run==283456) {delay=75; return delay; }  //283456 - WBC168  global delay 12ns  (new equivalent zero point)
+  if (run==283457) {delay=100; return delay; } //283457 - WBC167 (new -1 BX point)
+  if (run==283458) {delay=50; return delay; }  //283458 - WBC169 (new +1 BX point)
+  if (run==283459) {delay=38; return delay; }  //283459 - WBC169 global delay 0ns
+  if (run==283460) {delay=63; return delay; }  //283460 - WBC168 global delay 0ns
+  if (run==283461) {delay=88; return delay; }  //283461- WBC167 global delay 0ns
+
 // New Timing scan on 22 October, now the BmO and the BmI are in the same WBC, the delay settings are arbitrary
   if (run==283834) {delay=65; return delay; } //WBC=168 === WBC="+2"
   if (run==283835) {
-    if (ls<15)  { delay=90; return delay; }  //WBC=167 === WBC="+1"
-    if (ls<28)  { delay=40; return delay; }  //WBC=169 === WBC="+3"
+    if (ls<15)  { delay=90; return delay; }   //WBC=167 === WBC="+1"
+    if (ls<28)  { delay=40; return delay; }   //WBC=169 === WBC="+3"
     if (ls<41)  { delay=115; return delay; }  //WBC=166 === WBC="0"
-    if (ls<54)  { delay=15; return delay; } //WBC=170 === WBC="+4"
+    if (ls<54)  { delay=15; return delay; }   //WBC=170 === WBC="+4"
     if (ls<69)  { delay=140; return delay; }  //WBC=165 === WBC="-1"
-	else		{ delay=65; return delay;}   //WBC=168 === WBC="+2"
+    else	{ delay=65; return delay;}    //WBC=168 === WBC="+2"
   }
 
   return delay;

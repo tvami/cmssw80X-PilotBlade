@@ -613,7 +613,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
             
             if (evt.federrs_size==0 && module_on.federr==0) {
                 PBHitEffVsDel_den[imod]->Fill(delay(evt.run, evt.ls));
-                if (fabs(dx_cl)<0.05 && fabs(dy_cl)<0.05) PBHitEffVsDel_num[imod]->Fill(delay(evt.run, evt.ls));
+                if (fabs(dx_cl)<0.2 && fabs(dy_cl)<0.2) PBHitEffVsDel_num[imod]->Fill(delay(evt.run, evt.ls));
                 PBHitsGlobal[imod]->Fill(traj.glx, traj.gly);
                 PBHitCluDx[imod]->Fill(dx_cl);
                 PBHitCluDy[imod]->Fill(dy_cl);

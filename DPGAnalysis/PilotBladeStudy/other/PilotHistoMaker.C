@@ -48,7 +48,7 @@ void digis(bool saveAll, std::string save_dir, const char* format, TChain* filec
     Long64_t reduceFraction=0;
     Int_t skipFiles=0;
     
-    int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 344131844, 1 };
+    int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 1, 344131844 };
     //int _detids[] = { 344130820, 344131844, 344132868, 344133892, 344131076, 344132100, 344133124, 344134148, 1 };
     std::vector<int> detids(_detids, _detids + sizeof(_detids) / sizeof(int) );
     
@@ -234,7 +234,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
     Long64_t reduceFraction=0;
     Int_t skipFiles=0;
     
-    int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 344131844, 1 };
+    int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 1, 344131844 };
     //int _detids[] = { 344130820, 344131844, 344132868, 344133892, 344131076, 344132100, 344133124, 344134148, 1 };
     std::vector<int> detids(_detids, _detids + sizeof(_detids) / sizeof(int) );
     
@@ -496,7 +496,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
     Long64_t reduceFraction=0;
     Int_t skipFiles=0;
     
-    int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 344131844, 1 };
+    int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 1, 344131844 };
     //int _detids[] = { 344130820, 344131844, 344132868, 344133892, 344131076, 344132100, 344133124, 344134148 };
     std::vector<int> detids(_detids, _detids + sizeof(_detids) / sizeof(int) );
     
@@ -729,5 +729,5 @@ int main(int argc, char* argv[]) {
     
     //digis(saveAll, "./digis/", format, filechain);
     clusters(saveAll, "./clusters/", format, filechain);
-    rechits(saveAll, "./rechits/", format, filechain);
+    //rechits(saveAll, "./rechits/", format, filechain);
 }

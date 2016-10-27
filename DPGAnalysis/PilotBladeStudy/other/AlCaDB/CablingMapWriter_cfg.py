@@ -71,7 +71,7 @@ process.load("CalibTracker.SiPixelConnectivity.PixelToLNKAssociateFromAsciiESPro
 process.mapwriter = cms.EDAnalyzer("SiPixelFedCablingMapWriter",
   record = cms.string('SiPixelFedCablingMapRcd'),
   #associator = cms.untracked.string('PixelToLNKAssociateFromAscii'),
-  fileName = cms.untracked.string('pixelToLNK_pilot.ascii')
+  fileName = cms.untracked.string('pixelToLNK_pilot_FED1240.ascii')
 )
 
 process.p1 = cms.Path(process.mapwriter)

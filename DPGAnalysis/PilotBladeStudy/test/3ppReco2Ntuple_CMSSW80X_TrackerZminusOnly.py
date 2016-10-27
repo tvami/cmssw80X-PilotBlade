@@ -47,7 +47,7 @@ process.configurationMetadata = cms.untracked.PSet(
 
 # --------------------- GlobalTag ----------------------
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '80X_dataRun2_Prompt_v8', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_data', '')
 
 ##----------------------%<------------------
 process.GlobalTag.toGet = cms.VPSet(
@@ -114,15 +114,68 @@ process.PilotBladeStudy = cms.EDAnalyzer("PilotBladeStudy",
             dy = cms.double(-0.086)
         ),
   ),
-  FiducialRegions = cms.untracked.VPSet(
+ FiducialRegions = cms.untracked.VPSet(
+		# Blade 2
        cms.PSet(
-            id = cms.uint32(344132868),
+            id = cms.uint32(344131844),
+            #BmI Blade2 Panel1
             marginX = cms.double(0.1),
             marginY = cms.double(0.1),
-            rocX = cms.vint32(-1,-1,1,1),
-            rocY = cms.vint32(1,2,1,2)
-        )
-  )                                       
+            rocX = cms.vint32(1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1),
+            #rocY = cms.vint32(1, 2, 3, 4,6,7,8, 1, 2, 3,5,6,7)
+            rocY = cms.vint32(-4,-3,-2,-1,2,3,4,-4,-3,-2,1,2,3)# this is mirrored in global!!
+        ),
+       cms.PSet(
+            id = cms.uint32(344132100),
+            #BmI Blade2 Panel2
+            marginX = cms.double(0.1),
+            marginY = cms.double(0.1),
+            rocX = cms.vint32(1,1,1,1,1,-1,-1,-1,-1,-1,-1),
+            #rocY = cms.vint32(4,5,6,7,8, 2, 3,5,6,7,8)
+            rocY = cms.vint32(-1,1,2,3,4,-3,-2,1,2,3,4)
+        ),
+		# Blade 3
+       cms.PSet(
+            id = cms.uint32(344130820),
+            #BmI Blade3 Panel1
+            marginX = cms.double(0.1),
+            marginY = cms.double(0.1),
+            rocX = cms.vint32(1,1,1,1,-1,-1,-1,-1,-1,-1,-1),
+            #rocY = cms.vint32(3, 4,5,6, 2, 3, 4,5,6,7,8)
+			rocY = cms.vint32(-2,-1,1,2,-3,-2,-1,1,2,3,4)
+        ),
+       cms.PSet(
+            id = cms.uint32(344131076),
+            #BmI Blade3 Panel2
+            marginX = cms.double(0.1),
+            marginY = cms.double(0.1),
+            rocX = cms.vint32(-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1),
+            #rocY = cms.vint32(1, 2, 3,5,6,7, 1,2,3,5,6,7,8)
+            rocY = cms.vint32(-4,-3,-2,1,2,3,-4,-3,-2,1,2,3,4)
+        ),
+		# Blade 10
+       cms.PSet(
+            id = cms.uint32(344132868),
+            #BmO Blade10 Panel1
+            marginX = cms.double(0.1),
+            marginY = cms.double(0.1),
+            rocX = cms.vint32(-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1),
+            #rocY = cms.vint32(1, 2, 3, 4,5,6,7,8, 1, 2, 3, 4,5,6)
+            rocY = cms.vint32(-4,-3,-2,-1,1,2,3,4,-4,-3,-2,-1,1,2)
+        ),
+		# Blade 11
+       cms.PSet(
+            id = cms.uint32(344134148),
+            #BmO Blade11 Panel2
+            marginX = cms.double(0.1),
+            marginY = cms.double(0.1),
+            rocX = cms.vint32(1,1,1,1,1,-1,-1,-1,-1,-1,-1),
+            #rocY = cms.vint32(3, 4,5,7,8, 3, 4,5,6,7,8)
+            rocY = cms.vint32(-2,-1,1,3,4,-2,-1,1,2,3,4)
+        ),
+
+  )
+                                     
 )
 #-------------------------------------------------------
 

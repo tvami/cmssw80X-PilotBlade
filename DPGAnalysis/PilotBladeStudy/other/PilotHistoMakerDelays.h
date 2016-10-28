@@ -181,9 +181,11 @@ int delay(uint run, const uint ls) {
     if (ls<43)  { delay=99; return delay; } //alias:Physics_p99ns_p74ns_6
     if (ls<66)  { delay=24; return delay; } //alias:Physics_p24ns_m1ns_6
     if (ls<87)  { delay=124; return delay; } //alias:Physics_p124ns_p99ns_6
-    if (ls<107)  { delay=74; return delay; } //alias:Physics_p74ns_p49ns_6
+    if (ls<108)  { delay=74; return delay; } //alias:Physics_p74ns_p49ns_6
   }
   //2016 October
+  if (run==282033) {delay=74; return delay; } //WBC="0"
+  if (run==282036) {delay=74; return delay; } //WBC="0"
   if (run==282093) {
     if (ls<28)  { delay=74; return delay; } //WBC="0", key:2448, LS: 0-28, BmIWBC:166, BmOWBC:167, alias:Physics_p74ns_p49ns_6 
     if (ls<50)  { delay=49; return delay; } //WBC="+1", key:2447, LS:28-50, BmIWBC:167, BmOWBC:168, alias:Physics_p49ns_p24ns_6

@@ -262,7 +262,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
     
     std::vector<TH1F *> PBClusterFEDErrVsDel;
     std::vector<TH1F *> PBClusterFEDErrType;
-    //std::vector<TH1F *> PBClusterFEDErrTypePerEvent;
+    std::vector<TH1F *> PBClusterFEDErrTypePerEvent;
     
     
     for (uint imod=0; imod<detids.size(); imod++) {
@@ -284,7 +284,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
         
         PBClusterFEDErrVsDel.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrVsDel_%d", detids[imod]),  Form("Fraction of clusters with FED error vs Delay in %s;Delay;Clusters with FED err", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
         PBClusterFEDErrType.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrType_%d", detids[imod]),  Form("Fraction of clusters with FED error vs Error type in %s;Error type;Cluster fraction", name(detids[imod]).c_str()), 16, 24.5, 40.5))); vh.push_back(h);    
-        //PBClusterFEDErrTypePerEvent.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrTypePerEvent_%d", detids[imod]),  Form("Fraction of events with FED error vs Error type in %s;Error type;Event fraction", name(detids[imod]).c_str()), 16, 24.5, 40.5))); vh.push_back(h);    
+        PBClusterFEDErrTypePerEvent.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrTypePerEvent_%d", detids[imod]),  Form("Fraction of events with FED error vs Error type in %s;Error type;Event fraction", name(detids[imod]).c_str()), 16, 24.5, 40.5))); vh.push_back(h);    
         
         hists.push_back(vh);
     }
@@ -306,7 +306,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
     ClustData clusters;
     TrajMeasData traj;
     
-    int eventNumber = 0;
+    long eventNumber = 0;
     
     TObjArray* fileElements = filechain->GetListOfFiles();
     TIter next(fileElements);
@@ -414,7 +414,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
             
             PBClusterFEDErrVsDel[imod]->Scale(1./PBClusterCharge[imod]->GetEntries());
             PBClusterFEDErrType[imod]->Scale(1./PBClusterCharge[imod]->GetEntries());
-            //PBClusterFEDErrTypePerEvent[imod]->Scale(1./eventNumber);
+            PBClusterFEDErrTypePerEvent[imod]->Scale(1./eventNumber);
             
         }
         if (it_idx!=idx.end()) PBClustersVsDel_num[it_idx->second]->Divide(PBClustersVsDel_den[it_idx->second]); // fraction of events with FPix clusters in all events

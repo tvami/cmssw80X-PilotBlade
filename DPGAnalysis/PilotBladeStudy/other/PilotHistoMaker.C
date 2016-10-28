@@ -521,8 +521,8 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
     std::vector<TH1F *> PBHitEffVsDel_num;
     std::vector<TH1F *> PBHitEffVsDel_den;
     
-    std::vector<TH1F *> PBClustersVsDel_num;
-    std::vector<TH1F *> PBClustersVsDel_den;
+    //std::vector<TH1F *> PBClustersVsDel_num;
+    //std::vector<TH1F *> PBClustersVsDel_den;
     
     for (size_t imod=0; imod<detids.size(); imod++) {
         
@@ -541,8 +541,8 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
         
         PBHitEffVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBHitEffVsDel_2mm_%d", detids[imod]),  Form("RecHit efficiency vs Delay in %s;Delay;Efficiency", name(detids[imod]).c_str()), 150, 0, 150))); vh.push_back(h);
         PBHitEffVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBHitNumberVsDel_%d", detids[imod]),  Form("Num of RecHits vs Delay in %s;Delay;Num of hits", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
-        PBClustersVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBClustersVsDel_num_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
-        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBNumberOfEventsVsDel_den_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
+        //PBClustersVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBClustersVsDel_num_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
+        //PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBNumberOfEventsVsDel_den_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
         
         hists.push_back(vh);
     }
@@ -662,7 +662,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
             //if (it_idx!=idx.end() && imod!=it_idx->second) PBClustersVsDel_num[imod]->Divide(PBClustersVsDel_num[it_idx->second]); //average ratio of PB clusters to FPix clusters in events with FPix clusters
             PBHitEffVsDel_num[imod]->Divide(PBHitEffVsDel_den[imod]);
         }
-        if (it_idx!=idx.end()) PBClustersVsDel_num[it_idx->second]->Divide(PBClustersVsDel_den[it_idx->second]); // fraction of events with FPix clusters in all events
+        //if (it_idx!=idx.end()) PBClustersVsDel_num[it_idx->second]->Divide(PBClustersVsDel_den[it_idx->second]); // fraction of events with FPix clusters in all events
     }
     // Create the canvas and save
     

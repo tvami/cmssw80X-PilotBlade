@@ -181,7 +181,7 @@ int delay(uint run, const uint ls) {
     if (ls<43)  { delay=99; return delay; } //alias:Physics_p99ns_p74ns_6
     if (ls<66)  { delay=24; return delay; } //alias:Physics_p24ns_m1ns_6
     if (ls<87)  { delay=124; return delay; } //alias:Physics_p124ns_p99ns_6
-    if (ls<108)  { delay=74; return delay; } //alias:Physics_p74ns_p49ns_6
+    else        { delay=74; return delay; } //alias:Physics_p74ns_p49ns_6
   }
   //2016 October
   if (run==282033) {delay=74; return delay; } //WBC="0"

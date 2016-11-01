@@ -495,6 +495,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
     Int_t selectDelay=-9999;
     Long64_t reduceFraction=0;
     Int_t skipFiles=0;
+	bool COLZ=false;
     
     int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 1, 344131844 };
     //int _detids[] = { 344130820, 344131844, 344132868, 344133892, 344131076, 344132100, 344133124, 344134148 };
@@ -531,17 +532,27 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
         std::vector<TH1*> vh;
         TH1 *h;
         
-        PBHitsGlobal.push_back((TH2F*)(h=new TH2F(Form("PBHitsGlobal_COLZ_%d", detids[imod]), Form("RecHits in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
-        PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_COLZ_%d", detids[imod]), Form("Hits in %s;y;x", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0))); vh.push_back(h);
+
 
         PBHitCluDx.push_back((TH1F*)(h=new TH1F(Form("PBHitCluDx_%d", detids[imod]),  Form("Rechit to nearest cluster distance in %s;dx [cm];Yield", name(detids[imod]).c_str()), 400,-2,2))); vh.push_back(h);
         PBHitCluDy.push_back((TH1F*)(h=new TH1F(Form("PBHitCluDy_%d", detids[imod]),  Form("Rechit to nearest cluster distance in %s;dy [cm];Yield", name(detids[imod]).c_str()), 1000,-7,3))); vh.push_back(h);
+		if (COLZ==true) {
+			PBHitsGlobal.push_back((TH2F*)(h=new TH2F(Form("PBHitsGlobal_COLZ_%d", detids[imod]), Form("RecHits in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
+			PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_COLZ_%d", detids[imod]), Form("Hits in %s;y;x", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0))); vh.push_back(h);
 
-        PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
-        PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
-        PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
-        PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
+			PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
+			PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
+			PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
+			PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
+		} else {
+        	PBHitsGlobal.push_back((TH2F*)(h=new TH2F(Form("PBHitsGlobal_%d", detids[imod]), Form("RecHits in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
+        	PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_%d", detids[imod]), Form("Hits in %s;y;x", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0))); vh.push_back(h);
 
+		    PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
+		    PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
+		    PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
+		    PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
+		}
         
         PBHitEffVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBHitEffVsDel_2mm_%d", detids[imod]),  Form("RecHit efficiency vs Delay in %s;Delay;Efficiency", name(detids[imod]).c_str()), 150, 0, 150))); vh.push_back(h);
         PBHitEffVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBHitNumberVsDel_%d", detids[imod]),  Form("Num of RecHits vs Delay in %s;Delay;Num of hits", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
@@ -677,34 +688,8 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
         for (size_t i=0; i<hists.size(); i++) { // loop on modules
             if (hists[i][j]->GetEntries()==0) continue;
             TCanvas *c = new TCanvas(Form("c%d_%d", int(i), int(j)), Form("%d_%d", int(i), int(j)), 600, 600);
-// 			//WBC=168 === WBC="+2"
-// 			if (delay(evt.run, evt.ls)==65) {
-// 						hists[i][j]->SetMarkerStyle(i==7 ? 20 : i+1);
-// 				}
-// 			//WBC=167 === WBC="+1"
-// 			if (delay(evt.run, evt.ls)==90) {
-// 						hists[i][j]->SetMarkerStyle(i==7 ? 20 : i+1);
-// 				}
-// 			//WBC=169 === WBC="+3"
-// 			if (delay(evt.run, evt.ls)==40) {
-// 						hists[i][j]->SetMarkerStyle(i==7 ? 20 : i+1);
-// 						hists[i][j]->SetLineColor(i==7 ? 20 : i+1);
-// 				}
-// 			//WBC=166 === WBC="0"
-// 			if (delay(evt.run, evt.ls)==115) {
-// 						hists[i][j]->SetMarkerStyle(i==7 ? 20 : i+1);
-// 				}
-// 			//WBC=170 === WBC="+4"
-// 			if (delay(evt.run, evt.ls)==15) {
-// 						hists[i][j]->SetMarkerStyle(i==7 ? 20 : i+1);
-// 						hists[i][j]->SetLineColor(i==7 ? 20 : i+1);   
-// 				}
-// 			//WBC=165 === WBC="-1"
-// 			if (delay(evt.run, evt.ls)==140) {
-// 						hists[i][j]->SetMarkerStyle(i==7 ? 20 : i+1);
-// 				}
-            //hists[i][j]->Draw("COLZ");
-            hists[i][j]->Draw();
+
+			COLZ==true ? hists[i][j]->Draw("COLZ") : hists[i][j]->Draw();
             gPad->Update();
 
             if (saveRecHits) {

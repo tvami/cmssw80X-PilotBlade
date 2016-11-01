@@ -72,7 +72,7 @@ void digis(bool saveAll, std::string save_dir, const char* format, TChain* filec
         
         PBADCDist.push_back((TH1F*)(h=new TH1F(Form("PBADCDist_%d", detids[imod]), Form("ADC Distribution in %s ;ADC;Yield", name(detids[imod]).c_str()), 50,0.,250.))); vh.push_back(h);
         PBDigisMod.push_back((TH2F*)(h=new TH2F(Form("PBDigisMod_%d", detids[imod]), Form("Pixels in %s ;columns [pixels];rows [pixels]", name(detids[imod]).c_str()),   416,0,416.0,   160,0,160.0))); vh.push_back(h);
-
+        
         hists.push_back(vh);
     }
     
@@ -274,7 +274,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
         PBClusterSize.push_back((TH1F*)(h=new TH1F(Form("PBClusterSize_%d", detids[imod]), Form( "Clusters Size Distribution in %s;Cluster size [pixel];Yield", name(detids[imod]).c_str()), 10,0,10))); vh.push_back(h);
         PBClustersMod.push_back((TH2F*)(h=new TH2F(Form("PBClustersMod_%d", detids[imod]), Form("Clusters in %s;x;y", name(detids[imod]).c_str()),   416,0,416,   160,0,160.0))); vh.push_back(h);
         PBClustersGlobal.push_back((TH2F*)(h=new TH2F(Form("PBClustersGlobal_%d", detids[imod]), Form("Clusters in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
-
+        
         PBClusterChargeVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClusterChargeVsDel_%d", detids[imod]),  Form("Avg cluster charge vs Delay in %s;Delay;Avg cluster charge", name(detids[imod]).c_str()), 150,0, 150, 0, 150))); vh.push_back(h);
         PBClusterSizeVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClusterSizeVsDel_%d", detids[imod]),  Form("Avg cluster size vs Delay in %s;Delay;Avg cluster size", name(detids[imod]).c_str()), 150,0, 150, 0, 15))); vh.push_back(h);
         PBClustersVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClustersVsDel_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150, 0, 100))); vh.push_back(h);
@@ -306,7 +306,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
     ClustData clusters;
     TrajMeasData traj;
     
-    long eventNumber = 0;
+    int eventNumber = 0;
     
     TObjArray* fileElements = filechain->GetListOfFiles();
     TIter next(fileElements);
@@ -365,7 +365,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
                         
                         if (it_idx!=idx.end() && clusterCounter[it_idx->second]>0) { // If there was hit in FPix Disk 2 in the event
                             for (size_t ii=0; ii<currentEvent.size(); ii++) { 
-								PBClustersVsDel[ii]->Fill(delay(currentRunLs[ii].first, currentRunLs[ii].second), clusterCounter[ii]); // counts the clusters for 0-suppressed TProfile
+                                PBClustersVsDel[ii]->Fill(delay(currentRunLs[ii].first, currentRunLs[ii].second), clusterCounter[ii]); // counts the clusters for 0-suppressed TProfile
                                 if (ii!=it_idx->second) PBClustersVsDel_num[ii]->Fill(delay(currentRunLs[ii].first, currentRunLs[ii].second), clusterCounter[ii]/clusterCounter[it_idx->second]); // counts fraction of clusters in PB w.r.t FPix, to be divided by all events with FPix clusters
                                 else PBClustersVsDel_num[ii]->Fill(delay(currentRunLs[ii].first, currentRunLs[ii].second), 1); // all events with FPix clusters
                                 //printf("run %d (%d), ls %d (%d), evt %d (%d), %s, num of clu %d, num of ref clu %d\n", currentRunLs[ii].first, evt.run, currentRunLs[ii].second, evt.ls, currentEvent[ii], evt.evt, name(_detids[ii]).c_str(), clusterCounter[ii], clusterCounter[it_idx->second]);
@@ -511,18 +511,20 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
     std::vector<std::vector<TH1*> > hists;
     
     std::vector<TH2F *> PBHitsGlobal;
-	std::vector<TH2F *> PBHitsMod;
-
+    std::vector<TH2F *> PBHitsMod;
+    
     std::vector<TH1F *> PBHitCluDx;
     std::vector<TH1F *> PBHitCluDy;
     std::vector<TH2F *> PBHitCluXDx;
     std::vector<TH2F *> PBHitCluYDy;
+    std::vector<TH2F *> PBHitCluXDy;
+    std::vector<TH2F *> PBHitCluYDx;
     
     std::vector<TH1F *> PBHitEffVsDel_num;
     std::vector<TH1F *> PBHitEffVsDel_den;
     
-    //std::vector<TH1F *> PBClustersVsDel_num;
-    //std::vector<TH1F *> PBClustersVsDel_den;
+    std::vector<TH1F *> PBClustersVsDel_num;
+    std::vector<TH1F *> PBClustersVsDel_den;
     
     for (size_t imod=0; imod<detids.size(); imod++) {
         
@@ -530,19 +532,21 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
         TH1 *h;
         
         PBHitsGlobal.push_back((TH2F*)(h=new TH2F(Form("PBHitsGlobal_%d", detids[imod]), Form("RecHits in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
-        PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_%d", detids[imod]), Form("Hits in %s;x;y", name(detids[imod]).c_str()),   416,-3.0,3.0,   160,-0.55,0.55))); vh.push_back(h);
-
+        PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_%d", detids[imod]), Form("Hits in %s;y;x", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0))); vh.push_back(h);
+        
         PBHitCluDx.push_back((TH1F*)(h=new TH1F(Form("PBHitCluDx_%d", detids[imod]),  Form("Rechit to nearest cluster distance in %s;dx [cm];Yield", name(detids[imod]).c_str()), 400,-2,2))); vh.push_back(h);
         PBHitCluDy.push_back((TH1F*)(h=new TH1F(Form("PBHitCluDy_%d", detids[imod]),  Form("Rechit to nearest cluster distance in %s;dy [cm];Yield", name(detids[imod]).c_str()), 1000,-7,3))); vh.push_back(h);
-
-        PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_%d", detids[imod]),  Form("Rechit position (x) and its corresponding residual in %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
-        PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_%d", detids[imod]),  Form("Rechit position (y) and its corresponding residual in %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
-
+        
+        PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
+        PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
+        PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
+        PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
+        
         
         PBHitEffVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBHitEffVsDel_2mm_%d", detids[imod]),  Form("RecHit efficiency vs Delay in %s;Delay;Efficiency", name(detids[imod]).c_str()), 150, 0, 150))); vh.push_back(h);
         PBHitEffVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBHitNumberVsDel_%d", detids[imod]),  Form("Num of RecHits vs Delay in %s;Delay;Num of hits", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
-        //PBClustersVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBClustersVsDel_num_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
-        //PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBNumberOfEventsVsDel_den_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
+        PBClustersVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBClustersVsDel_num_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
+        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBNumberOfEventsVsDel_den_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
         
         hists.push_back(vh);
     }
@@ -603,8 +607,8 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
             if (it_idx==idx.end()) continue;
             if (traj.type!=102) continue;
             int imod = it_idx->second;
-
-            PBHitsMod[imod]->Fill(traj.ly,traj.lx);   
+            
+            
             // Correction to cluster positions  344132868, 344134148, 344131076, 344132100, 344130820
             float dx_cl = traj.dx_cl;
             float dy_cl = traj.dy_cl;
@@ -625,13 +629,16 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
             if (evt.federrs_size==0 && module_on.federr==0) {
                 PBHitEffVsDel_den[imod]->Fill(delay(evt.run, evt.ls));
                 if (fabs(dx_cl)<0.2 && fabs(dy_cl)<0.2) {
-					PBHitEffVsDel_num[imod]->Fill(delay(evt.run, evt.ls));
-				}
+                    PBHitEffVsDel_num[imod]->Fill(delay(evt.run, evt.ls));
+                }
                 PBHitsGlobal[imod]->Fill(traj.glx, traj.gly);
+                PBHitsMod[imod]->Fill(traj.ly,traj.lx);   
                 PBHitCluDx[imod]->Fill(dx_cl);
                 PBHitCluDy[imod]->Fill(dy_cl);
-				PBHitCluXDx[imod]->Fill(traj.dy_cl,traj.lx);
-                PBHitCluYDy[imod]->Fill(traj.dx_cl,traj.lx);
+                PBHitCluXDx[imod]->Fill(traj.lx,traj.dx_cl);
+                PBHitCluYDy[imod]->Fill(traj.ly,traj.dy_cl);
+                PBHitCluXDy[imod]->Fill(traj.lx,traj.dy_cl);
+                PBHitCluYDx[imod]->Fill(traj.ly,traj.dx_cl);
             }
             
         }
@@ -662,7 +669,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
             //if (it_idx!=idx.end() && imod!=it_idx->second) PBClustersVsDel_num[imod]->Divide(PBClustersVsDel_num[it_idx->second]); //average ratio of PB clusters to FPix clusters in events with FPix clusters
             PBHitEffVsDel_num[imod]->Divide(PBHitEffVsDel_den[imod]);
         }
-        //if (it_idx!=idx.end()) PBClustersVsDel_num[it_idx->second]->Divide(PBClustersVsDel_den[it_idx->second]); // fraction of events with FPix clusters in all events
+        if (it_idx!=idx.end()) PBClustersVsDel_num[it_idx->second]->Divide(PBClustersVsDel_den[it_idx->second]); // fraction of events with FPix clusters in all events
     }
     // Create the canvas and save
     
@@ -670,14 +677,50 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
         for (size_t i=0; i<hists.size(); i++) { // loop on modules
             if (hists[i][j]->GetEntries()==0) continue;
             TCanvas *c = new TCanvas(Form("c%d_%d", int(i), int(j)), Form("%d_%d", int(i), int(j)), 600, 600);
-            hists[i][j]->Draw();
-            gPad->Update();
-            if (saveRecHits) {
-                c->SaveAs(Form("%s%s%s", save_dir.c_str(), hists[i][j]->GetName(),format));
-                c->SaveAs(Form("%s%s%s", save_dir.c_str(), hists[i][j]->GetName(),".C"));
+            //WBC=168 === WBC="+2"
+            if (delay(evt.run, evt.ls)==65) {
+                hists[i][j]->SetLineColor(20);
+                hists[i][j]->Draw();
+            }
+            //WBC=167 === WBC="+1"
+            if (delay(evt.run, evt.ls)==90) {
+                hists[i][j]->SetLineColor(30);
+                hists[i][j]->Draw("SAME");
+            }
+            //WBC=169 === WBC="+3"
+            if (delay(evt.run, evt.ls)==40) {
+                hists[i][j]->SetMarkerColor(40);
+                hists[i][j]->SetLineColor(40);
+                hists[i][j]->Draw("SAME");
+            }
+            //WBC=166 === WBC="0"
+            if (delay(evt.run, evt.ls)==115) {
+                hists[i][j]->SetLineColor(42);
+                hists[i][j]->Draw("SAME");
+            }
+            //WBC=170 === WBC="+4"
+            if (delay(evt.run, evt.ls)==15) {
+                hists[i][j]->SetMarkerColor(44);
+                hists[i][j]->SetLineColor(44);   
+                hists[i][j]->Draw("SAME");
+            }
+            //WBC=165 === WBC="-1"
+            if (delay(evt.run, evt.ls)==140) {
+                hists[i][j]->SetLineColor(46);
+                hists[i][j]->Draw("SAME");
             }
         }
+        
+        //hists[i][j]->Draw("COLZ");
+
+        gPad->Update();
+        
+        if (saveRecHits) {
+            c->SaveAs(Form("%s%s%s", save_dir.c_str(), hists[i][j]->GetName(),format));
+            c->SaveAs(Form("%s%s%s", save_dir.c_str(), hists[i][j]->GetName(),".C"));
+        }
     }
+
     
     std::vector<double> maxis(hists[0].size(), FLT_MIN);
     std::vector<double> minis(hists[0].size(), FLT_MAX);

@@ -222,6 +222,10 @@ int delay(uint run, const uint ls) {
     if (ls<69)  { delay=140; return delay; }  //WBC=165 === WBC="-1"
     else	{ delay=65; return delay;}    //WBC=168 === WBC="+2"
   }
+  if (run==284077) {delay=40; return delay; } //WBC=169 === WBC="+3"
+  if (run==284078) {delay=40; return delay; } //WBC=169 === WBC="+3"
+
+
 
   return delay;
 }

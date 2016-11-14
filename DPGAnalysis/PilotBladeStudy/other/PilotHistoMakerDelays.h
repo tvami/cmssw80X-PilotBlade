@@ -222,6 +222,11 @@ int delay(uint run, const uint ls) {
     if (ls<69)  { delay=140; return delay; }  //WBC=165 === WBC="-1"
     else	{ delay=65; return delay;}    //WBC=168 === WBC="+2"
   }
+  if (run==284035) {delay=15; return delay; }   //WBC=170 === WBC="+4"
+  if (run==284036) {delay=90; return delay; }   //WBC=167 === WBC="+1"
+  if (run==284037) {delay=65; return delay; }    //WBC=168 === WBC="+2"
+  if (run==284038) {delay=115; return delay; }  //WBC=166 === WBC="0"
+  
   if (run==284077) {delay=40; return delay; } //WBC=169 === WBC="+3"
   if (run==284078) {delay=40; return delay; } //WBC=169 === WBC="+3"
 

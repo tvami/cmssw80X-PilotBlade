@@ -1,7 +1,7 @@
 mkdir digis
 mkdir clusters
 mkdir rechits
-cd /data/vami/projects/pilotBlade/uTCA-data/GlobalRuns/CMSSW_8_0_20_patch1/src
+cd /data/vami/projects/pilotBlade/uTCA-data/pp-ZeroBias/CMSSW_8_0_20_patch1/src
 cmsenv
 cd -
 make clean

@@ -233,6 +233,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
     Int_t selectDelay=-9999;
     Long64_t reduceFraction=0;
     Int_t skipFiles=0;
+    bool COLZ=true;
     
     int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 1, 344131844 };
     //int _detids[] = { 344130820, 344131844, 344132868, 344133892, 344131076, 344132100, 344133124, 344134148, 1 };
@@ -272,8 +273,13 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
         
         PBClusterCharge.push_back((TH1F*)(h=new TH1F(Form("PBClusterCharge_%d", detids[imod]),  Form("Clusters Charge Distribution in  %s;Cluster charge [ke];Yield", name(detids[imod]).c_str()), 150,0,150))); vh.push_back(h);
         PBClusterSize.push_back((TH1F*)(h=new TH1F(Form("PBClusterSize_%d", detids[imod]), Form( "Clusters Size Distribution in %s;Cluster size [pixel];Yield", name(detids[imod]).c_str()), 10,0,10))); vh.push_back(h);
-        PBClustersMod.push_back((TH2F*)(h=new TH2F(Form("PBClustersMod_%d", detids[imod]), Form("Clusters in %s;Columns [pixel];Rows [pixel]", name(detids[imod]).c_str()),   416,0,416,   160,0,160.0))); vh.push_back(h);
-        PBClustersGlobal.push_back((TH2F*)(h=new TH2F(Form("PBClustersGlobal_%d", detids[imod]), Form("Clusters in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
+        if (COLZ==true) {
+            PBClustersMod.push_back((TH2F*)(h=new TH2F(Form("PBClustersMod_COLZ_%d", detids[imod]), Form("Cluster occupancy in %s;Columns [pixel];Rows [pixel]", name(detids[imod]).c_str()),   416,0,416,   160,0,160.0))); vh.push_back(h);
+            PBClustersGlobal.push_back((TH2F*)(h=new TH2F(Form("PBClustersGlobal_COLZ_%d", detids[imod]), Form("Cluster occupancy in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
+        } else {
+            PBClustersMod.push_back((TH2F*)(h=new TH2F(Form("PBClustersMod_%d", detids[imod]), Form("Clusters in %s;Columns [pixel];Rows [pixel]", name(detids[imod]).c_str()),   416,0,416,   160,0,160.0))); vh.push_back(h);
+            PBClustersGlobal.push_back((TH2F*)(h=new TH2F(Form("PBClustersGlobal_%d", detids[imod]), Form("Clusters in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
+        }
 
         PBClusterChargeVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClusterChargeVsDel_%d", detids[imod]),  Form("Avg cluster charge vs Delay in %s;Delay;Avg cluster charge", name(detids[imod]).c_str()), 150,0, 150, 0, 150))); vh.push_back(h);
         PBClusterSizeVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClusterSizeVsDel_%d", detids[imod]),  Form("Avg cluster size vs Delay in %s;Delay;Avg cluster size", name(detids[imod]).c_str()), 150,0, 150, 0, 15))); vh.push_back(h);
@@ -332,6 +338,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
             if (reduceFraction!=0 && i%reduceFraction!=0) continue;
             clustTree->GetEntry(i);
             int del=delay(evt.run, evt.ls);
+            //if (evt.run!=284036) continue;
             if (del==-9999) {
                 std::cout << "Run " << evt.run << " LS " << evt.ls << "has no delay set up -- exiting" << std::endl; 
                 continue; 
@@ -425,7 +432,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
         for (size_t i=0; i<hists.size(); i++) { // loop on modules
             if (hists[i][j]->GetEntries()==0) continue;
             TCanvas *c = new TCanvas(Form("c%d_%d", int(i), int(j)), Form("%d_%d", int(i), int(j)), 600, 600);
-            hists[i][j]->Draw();
+            COLZ==true ? hists[i][j]->Draw("COLZ") : hists[i][j]->Draw();
             gPad->Update();
             if (saveClusters) {
                 c->SaveAs(Form("%s%s%s", save_dir.c_str(), hists[i][j]->GetName(),format));
@@ -461,7 +468,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
         TH1 *h = (TH1*) hists[0][j]->Clone("h");
         h->Reset();
         h->SetTitle(t.c_str());
-        h->Draw();
+        h->Draw(); 
         //TLegend *l = new TLegend(0.55, 0.15, 0.89, 0.30, "Modules");
         TLegend *l = new TLegend(0.15, 0.70, 0.49, 0.85, "Modules");
         l->SetLineColor(0);
@@ -495,7 +502,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
     Int_t selectDelay=-9999;
     Long64_t reduceFraction=0;
     Int_t skipFiles=0;
-	bool COLZ=false;
+	bool COLZ=true;
     
     int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 1, 344131844 };
     //int _detids[] = { 344130820, 344131844, 344132868, 344133892, 344131076, 344132100, 344133124, 344134148 };
@@ -603,6 +610,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
         for (Long64_t i=0, ntraj=trajTree->GetEntries(); i<ntraj; ++i) {
             if (reduceFraction!=0 && i%reduceFraction!=0) continue;
             trajTree->GetEntry(i);
+            //if (evt.run!=284036) continue;
             int del=delay(evt.run, evt.ls);
             if (del==-9999) {
                 std::cout << "Run " << evt.run << " LS " << evt.ls << "has no delay set up -- exiting" << std::endl; 
@@ -759,7 +767,7 @@ int main(int argc, char* argv[]) {
     const char* format = ".png";
     
     TChain* filechain = new TChain("filechain");
-    filechain->Add("/data/vami/projects/0RootFiles/2016H/PB-Ntuples/Runs283834-283835_ZeroBias/Fidu3/*.root");
+    filechain->Add("/data/vami/projects/0RootFiles/2016H/PB-Ntuples/Runs284035-284038_ZeroBias/Fidu/*.root");
     //filechain->Add("/data/vami/projects/pilotBlade/uTCA-data/GlobalRuns/CMSSW_8_0_20_patch1/src/0crab/3Ntuple/Runs283834-283835/crab_PilotBlade_data_Ntuplizer_pp_Runs283834-283835_CMSSW8020_ZeroBias_Fidu3_v2/results/*.root");
     //filechain->Add("/data/vami/projects/0RootFiles/2016H/PB-Ntuples/Runs283834-283835_Express/nTuplePilotBlade_All_1.root");
     

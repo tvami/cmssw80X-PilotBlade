@@ -47,6 +47,7 @@ void digis(bool saveAll, std::string save_dir, const char* format, TChain* filec
     Int_t selectDelay=-9999;
     Long64_t reduceFraction=0;
     Int_t skipFiles=0;
+    bool COLZ=true;
     
     int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 1, 344131844 };
     //int _detids[] = { 344130820, 344131844, 344132868, 344133892, 344131076, 344132100, 344133124, 344134148, 1 };
@@ -71,7 +72,12 @@ void digis(bool saveAll, std::string save_dir, const char* format, TChain* filec
         TH1 *h;
         
         PBADCDist.push_back((TH1F*)(h=new TH1F(Form("PBADCDist_%d", detids[imod]), Form("ADC Distribution in %s ;ADC;Yield", name(detids[imod]).c_str()), 50,0.,250.))); vh.push_back(h);
-        PBDigisMod.push_back((TH2F*)(h=new TH2F(Form("PBDigisMod_%d", detids[imod]), Form("Pixels in %s ;columns [pixels];rows [pixels]", name(detids[imod]).c_str()),   416,0,416.0,   160,0,160.0))); vh.push_back(h);
+        
+        if (COLZ==true) {
+          PBDigisMod.push_back((TH2F*)(h=new TH2F(Form("PBDigisMod_COLZ_%d", detids[imod]), Form("Pixels in %s ;columns [pixels];rows [pixels]", name(detids[imod]).c_str()),   416,0,416.0,   160,0,160.0))); vh.push_back(h);        
+        } else {
+          PBDigisMod.push_back((TH2F*)(h=new TH2F(Form("PBDigisMod_%d", detids[imod]), Form("Pixels in %s ;columns [pixels];rows [pixels]", name(detids[imod]).c_str()),   416,0,416.0,   160,0,160.0))); vh.push_back(h);
+          }
 
         hists.push_back(vh);
     }
@@ -165,7 +171,7 @@ void digis(bool saveAll, std::string save_dir, const char* format, TChain* filec
         for (size_t i=0; i<hists.size(); i++) { // loop on modules
             if (hists[i][j]->GetEntries()==0) continue;
             TCanvas *c = new TCanvas(Form("c%d_%d", int(i), int(j)), Form("%d_%d", int(i), int(j)), 600, 600);
-            hists[i][j]->Draw();
+            COLZ==true ? hists[i][j]->Draw("COLZ") : hists[i][j]->Draw();
             gPad->Update();
             if (saveDigis) {
                 c->SaveAs(Form("%s%s%s", save_dir.c_str(), hists[i][j]->GetName(),format));

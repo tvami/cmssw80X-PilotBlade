@@ -47,7 +47,7 @@ void digis(bool saveAll, std::string save_dir, const char* format, TChain* filec
     Int_t selectDelay=-9999;
     Long64_t reduceFraction=0;
     Int_t skipFiles=0;
-    bool COLZ=true;
+    bool COLZ=false;
     
     int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 1, 344131844 };
     //int _detids[] = { 344130820, 344131844, 344132868, 344133892, 344131076, 344132100, 344133124, 344134148, 1 };
@@ -239,7 +239,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
     Int_t selectDelay=-9999;
     Long64_t reduceFraction=0;
     Int_t skipFiles=0;
-    bool COLZ=true;
+    bool COLZ=false;
     
     int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 1, 344131844 };
     //int _detids[] = { 344130820, 344131844, 344132868, 344133892, 344131076, 344132100, 344133124, 344134148, 1 };
@@ -508,7 +508,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
     Int_t selectDelay=-9999;
     Long64_t reduceFraction=0;
     Int_t skipFiles=0;
-	bool COLZ=true;
+	bool COLZ=false;
     
     int _detids[] = { 344132868, 344134148, 344131076, 344132100, 344130820, 1, 344131844 };
     //int _detids[] = { 344130820, 344131844, 344132868, 344133892, 344131076, 344132100, 344133124, 344134148 };

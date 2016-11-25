@@ -230,7 +230,28 @@ int delay(uint run, const uint ls) {
   if (run==284077) {delay=40; return delay; } //WBC=169 === WBC="+3"
   if (run==284078) {delay=40; return delay; } //WBC=169 === WBC="+3"
 
-
+  
+  if (run==285090) {delay=90; return delay; } //WBC=167 === WBC="+1"
+  if (run==285091) {delay=90; return delay; } //WBC=167 === WBC="+1"
+ 
+  if (run==285369) {
+    if (ls<720)  { delay=-999; return delay; }
+    if (ls<739)  { delay=0; return delay; }
+    if (ls<751)  { delay=2; return delay; }
+    if (ls<769)  { delay=4; return delay; }
+    if (ls<789)  { delay=6; return delay; }
+    if (ls<809)  { delay=8; return delay; }
+    if (ls<829)  { delay=10; return delay; }
+    if (ls<850)  { delay=12; return delay; }
+    if (ls<869)  { delay=14; return delay; }
+    if (ls<889)  { delay=16; return delay; }
+    if (ls<899)  { delay=18; return delay; }
+    if (ls<909)  { delay=20; return delay; }
+    if (ls<919)  { delay=22; return delay; }
+    if (ls<930)  { delay=24; return delay; }
+    else { delay=-999; return delay; }
+  }
+  
 
   return delay;
 }

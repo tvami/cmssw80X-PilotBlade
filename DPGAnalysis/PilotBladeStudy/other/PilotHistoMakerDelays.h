@@ -261,6 +261,29 @@ int delay(uint run, const uint ls) {
     if (ls<365)  { delay=40;  return delay; }   //WBC=169 === WBC="+3"
     else { delay=-999; return delay; }
   }
+  
+  if (run==286517) {
+    if (ls<20)  { delay=167; return delay; }
+    if (ls<50)  { delay=168; return delay; }
+    if (ls<70)  { delay=169; return delay; }
+    if (ls<90)  { delay=165;  return delay; }
+    if (ls<110)  { delay=166;  return delay; }
+    if (ls<130)  { delay=167;  return delay; }
+    else { delay=-999; return delay; }
+  }
+  if (run==286519) {
+    if (ls<20)  { delay=-999; return delay; }
+    if (ls<40)  { delay=0; return delay; }
+    if (ls<60)  { delay=24; return delay; }
+    if (ls<80)  { delay=4;  return delay; }
+    if (ls<100)  { delay=20;  return delay; }
+    if (ls<120)  { delay=8;  return delay; }
+    if (ls<140)  { delay=16;  return delay; }
+    if (ls<160)  { delay=12;  return delay; }
+    else { delay=-999; return delay; }
+  }
 
+  if (run==286520) {delay=18; return delay; } //for BmO
+  //if (run==286520) {delay=24; return delay; } //for BmI
   return delay;
 }

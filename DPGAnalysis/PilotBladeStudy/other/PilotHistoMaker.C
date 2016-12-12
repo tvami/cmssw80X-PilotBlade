@@ -571,7 +571,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
 		if (COLZ==true) {
 			PBHitsGlobal.push_back((TH2F*)(h=new TH2F(Form("PBHitsGlobal_COLZ_%d", detids[imod]), Form("RecHits in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16)));
  vh.push_back(h);
-			PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_COLZ_%d", detids[imod]), Form("Hits in %s;y;x", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0)));
+			PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_COLZ_%d", detids[imod]), Form("Hits in %s;Columns [cm];Rows [cm]", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0)));
  vh.push_back(h);
 
 			PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0)));
@@ -585,7 +585,7 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
 		} else {
         	PBHitsGlobal.push_back((TH2F*)(h=new TH2F(Form("PBHitsGlobal_%d", detids[imod]), Form("RecHits in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16)));
  vh.push_back(h);
-        	PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_%d", detids[imod]), Form("Hits in %s;y;x", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0)));
+        	PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_%d", detids[imod]), Form("Hits in %s;Columns [cm];Rows [cm]", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0)));
  vh.push_back(h);
 
 		    PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0)));

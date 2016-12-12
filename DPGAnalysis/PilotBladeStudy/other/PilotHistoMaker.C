@@ -531,8 +531,8 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
     std::vector<TH1F *> PBHitCluDy;
     std::vector<TH2F *> PBHitCluXDx;
     std::vector<TH2F *> PBHitCluYDy;
-    std::vector<TH2F *> PBHitCluXDy;
-    std::vector<TH2F *> PBHitCluYDx;
+    //std::vector<TH2F *> PBHitCluXDy;
+    //std::vector<TH2F *> PBHitCluYDx;
    
     std::vector<TH1F *> PBHitEffVsDel_num;
     std::vector<TH1F *> PBHitEffVsDel_den;
@@ -555,16 +555,16 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
 
 			PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
 			PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
-			PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
-			PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
+			//PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
+			//PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
 		} else {
         	PBHitsGlobal.push_back((TH2F*)(h=new TH2F(Form("PBHitsGlobal_%d", detids[imod]), Form("RecHits in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
         	PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_%d", detids[imod]), Form("Hits in %s;y;x", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0))); vh.push_back(h);
 
 		    PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
 		    PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
-		    PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
-		    PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
+		    //PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
+		    //PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
 		}
         
         PBHitEffVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBHitEffVsDel_2mm_%d", detids[imod]),  Form("RecHit efficiency vs Delay in %s;Delay;Efficiency", name(detids[imod]).c_str()), 150, 0, 150))); vh.push_back(h);
@@ -660,10 +660,10 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
             	PBHitsMod[imod]->Fill(traj.ly,traj.lx);   
                 PBHitCluDx[imod]->Fill(dx_cl);
                 PBHitCluDy[imod]->Fill(dy_cl);
-				PBHitCluXDx[imod]->Fill(traj.lx,traj.dx_cl);
+		PBHitCluXDx[imod]->Fill(traj.lx,traj.dx_cl);
                 PBHitCluYDy[imod]->Fill(traj.ly,traj.dy_cl);
-                PBHitCluXDy[imod]->Fill(traj.lx,traj.dy_cl);
-				PBHitCluYDx[imod]->Fill(traj.ly,traj.dx_cl);
+                //PBHitCluXDy[imod]->Fill(traj.lx,traj.dy_cl);
+		//PBHitCluYDx[imod]->Fill(traj.ly,traj.dx_cl);
             }
             
         }

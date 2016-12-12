@@ -71,12 +71,15 @@ void digis(bool saveAll, std::string save_dir, const char* format, TChain* filec
         std::vector<TH1*> vh;
         TH1 *h;
         
-        PBADCDist.push_back((TH1F*)(h=new TH1F(Form("PBADCDist_%d", detids[imod]), Form("ADC Distribution in %s ;ADC;Yield", name(detids[imod]).c_str()), 50,0.,250.))); vh.push_back(h);
+        PBADCDist.push_back((TH1F*)(h=new TH1F(Form("PBADCDist_%d", detids[imod]), Form("ADC Distribution in %s ;ADC;Yield", name(detids[imod]).c_str()), 50,0.,250.)));
+ vh.push_back(h);
         
         if (COLZ==true) {
-          PBDigisMod.push_back((TH2F*)(h=new TH2F(Form("PBDigisMod_COLZ_%d", detids[imod]), Form("Pixels in %s ;columns [pixels];rows [pixels]", name(detids[imod]).c_str()),   416,0,416.0,   160,0,160.0))); vh.push_back(h);        
+          PBDigisMod.push_back((TH2F*)(h=new TH2F(Form("PBDigisMod_COLZ_%d", detids[imod]), Form("Pixels in %s ;columns [pixels];rows [pixels]", name(detids[imod]).c_str()),   416,0,416.0,   160,0,160.0)));
+ vh.push_back(h);        
         } else {
-          PBDigisMod.push_back((TH2F*)(h=new TH2F(Form("PBDigisMod_%d", detids[imod]), Form("Pixels in %s ;columns [pixels];rows [pixels]", name(detids[imod]).c_str()),   416,0,416.0,   160,0,160.0))); vh.push_back(h);
+          PBDigisMod.push_back((TH2F*)(h=new TH2F(Form("PBDigisMod_%d", detids[imod]), Form("Pixels in %s ;columns [pixels];rows [pixels]", name(detids[imod]).c_str()),   416,0,416.0,   160,0,160.0)));
+ vh.push_back(h);
           }
 
         hists.push_back(vh);
@@ -277,26 +280,40 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
         std::vector<TH1*> vh;
         TH1 *h;
         
-        PBClusterCharge.push_back((TH1F*)(h=new TH1F(Form("PBClusterCharge_%d", detids[imod]),  Form("Clusters Charge Distribution in  %s;Cluster charge [ke];Yield", name(detids[imod]).c_str()), 150,0,150))); vh.push_back(h);
-        PBClusterSize.push_back((TH1F*)(h=new TH1F(Form("PBClusterSize_%d", detids[imod]), Form( "Clusters Size Distribution in %s;Cluster size [pixel];Yield", name(detids[imod]).c_str()), 10,0,10))); vh.push_back(h);
+        PBClusterCharge.push_back((TH1F*)(h=new TH1F(Form("PBClusterCharge_%d", detids[imod]),  Form("Clusters Charge Distribution in  %s;Cluster charge [ke];Yield", name(detids[imod]).c_str()), 150,0,150)));
+ vh.push_back(h);
+        PBClusterSize.push_back((TH1F*)(h=new TH1F(Form("PBClusterSize_%d", detids[imod]), Form( "Clusters Size Distribution in %s;Cluster size [pixel];Yield", name(detids[imod]).c_str()), 10,0,10)));
+ vh.push_back(h);
         if (COLZ==true) {
-            PBClustersMod.push_back((TH2F*)(h=new TH2F(Form("PBClustersMod_COLZ_%d", detids[imod]), Form("Cluster occupancy in %s;Columns [pixel];Rows [pixel]", name(detids[imod]).c_str()),   416,0,416,   160,0,160.0))); vh.push_back(h);
-            PBClustersGlobal.push_back((TH2F*)(h=new TH2F(Form("PBClustersGlobal_COLZ_%d", detids[imod]), Form("Cluster occupancy in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
+            PBClustersMod.push_back((TH2F*)(h=new TH2F(Form("PBClustersMod_COLZ_%d", detids[imod]), Form("Cluster occupancy in %s;Columns [pixel];Rows [pixel]", name(detids[imod]).c_str()),   416,0,416,   160,0,160.0)));
+ vh.push_back(h);
+            PBClustersGlobal.push_back((TH2F*)(h=new TH2F(Form("PBClustersGlobal_COLZ_%d", detids[imod]), Form("Cluster occupancy in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16)));
+ vh.push_back(h);
         } else {
-            PBClustersMod.push_back((TH2F*)(h=new TH2F(Form("PBClustersMod_%d", detids[imod]), Form("Clusters in %s;Columns [pixel];Rows [pixel]", name(detids[imod]).c_str()),   416,0,416,   160,0,160.0))); vh.push_back(h);
-            PBClustersGlobal.push_back((TH2F*)(h=new TH2F(Form("PBClustersGlobal_%d", detids[imod]), Form("Clusters in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
+            PBClustersMod.push_back((TH2F*)(h=new TH2F(Form("PBClustersMod_%d", detids[imod]), Form("Clusters in %s;Columns [pixel];Rows [pixel]", name(detids[imod]).c_str()),   416,0,416,   160,0,160.0)));
+ vh.push_back(h);
+            PBClustersGlobal.push_back((TH2F*)(h=new TH2F(Form("PBClustersGlobal_%d", detids[imod]), Form("Clusters in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16)));
+ vh.push_back(h);
         }
 
-        PBClusterChargeVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClusterChargeVsDel_%d", detids[imod]),  Form("Avg cluster charge vs Delay in %s;Delay;Avg cluster charge", name(detids[imod]).c_str()), 150,0, 150, 0, 150))); vh.push_back(h);
-        PBClusterSizeVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClusterSizeVsDel_%d", detids[imod]),  Form("Avg cluster size vs Delay in %s;Delay;Avg cluster size", name(detids[imod]).c_str()), 150,0, 150, 0, 15))); vh.push_back(h);
-        PBClustersVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClustersVsDel_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150, 0, 100))); vh.push_back(h);
+        PBClusterChargeVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClusterChargeVsDel_%d", detids[imod]),  Form("Avg cluster charge vs Delay in %s;Delay;Avg cluster charge", name(detids[imod]).c_str()), 150,0, 150, 0, 150)));
+ vh.push_back(h);
+        PBClusterSizeVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClusterSizeVsDel_%d", detids[imod]),  Form("Avg cluster size vs Delay in %s;Delay;Avg cluster size", name(detids[imod]).c_str()), 150,0, 150, 0, 15)));
+ vh.push_back(h);
+        PBClustersVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClustersVsDel_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150, 0, 100)));
+ vh.push_back(h);
         
-        PBClustersVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBClusterAvgNumVsDel_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
-        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBEventNumberVsDel_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
+        PBClustersVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBClusterAvgNumVsDel_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150)));
+ vh.push_back(h);
+        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBEventNumberVsDel_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150)));
+ vh.push_back(h);
         
-        PBClusterFEDErrVsDel.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrVsDel_%d", detids[imod]),  Form("Fraction of clusters with FED error vs Delay in %s;Delay;Clusters with FED err", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
-        PBClusterFEDErrType.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrType_%d", detids[imod]),  Form("Fraction of clusters with FED error vs Error type in %s;Error type;Cluster fraction", name(detids[imod]).c_str()), 16, 24.5, 40.5))); vh.push_back(h);    
-        PBClusterFEDErrTypePerEvent.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrTypePerEvent_%d", detids[imod]),  Form("Fraction of events with FED error vs Error type in %s;Error type;Event fraction", name(detids[imod]).c_str()), 16, 24.5, 40.5))); vh.push_back(h);    
+        PBClusterFEDErrVsDel.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrVsDel_%d", detids[imod]),  Form("Fraction of clusters with FED error vs Delay in %s;Delay;Clusters with FED err", name(detids[imod]).c_str()), 150,0, 150)));
+ vh.push_back(h);
+        PBClusterFEDErrType.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrType_%d", detids[imod]),  Form("Fraction of clusters with FED error vs Error type in %s;Error type;Cluster fraction", name(detids[imod]).c_str()), 16, 24.5, 40.5)));
+ vh.push_back(h);    
+        PBClusterFEDErrTypePerEvent.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrTypePerEvent_%d", detids[imod]),  Form("Fraction of events with FED error vs Error type in %s;Error type;Event fraction", name(detids[imod]).c_str()), 16, 24.5, 40.5)));
+ vh.push_back(h);    
         
         hists.push_back(vh);
     }
@@ -547,30 +564,48 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
         
 
 
-        PBHitCluDx.push_back((TH1F*)(h=new TH1F(Form("PBHitCluDx_%d", detids[imod]),  Form("Rechit to nearest cluster distance in %s;dx [cm];Yield", name(detids[imod]).c_str()), 400,-2,2))); vh.push_back(h);
-        PBHitCluDy.push_back((TH1F*)(h=new TH1F(Form("PBHitCluDy_%d", detids[imod]),  Form("Rechit to nearest cluster distance in %s;dy [cm];Yield", name(detids[imod]).c_str()), 1000,-7,3))); vh.push_back(h);
+        PBHitCluDx.push_back((TH1F*)(h=new TH1F(Form("PBHitCluDx_%d", detids[imod]),  Form("Rechit to nearest cluster distance in %s;dx [cm];Yield", name(detids[imod]).c_str()), 400,-2,2)));
+ vh.push_back(h);
+        PBHitCluDy.push_back((TH1F*)(h=new TH1F(Form("PBHitCluDy_%d", detids[imod]),  Form("Rechit to nearest cluster distance in %s;dy [cm];Yield", name(detids[imod]).c_str()), 1000,-7,3)));
+ vh.push_back(h);
 		if (COLZ==true) {
-			PBHitsGlobal.push_back((TH2F*)(h=new TH2F(Form("PBHitsGlobal_COLZ_%d", detids[imod]), Form("RecHits in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
-			PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_COLZ_%d", detids[imod]), Form("Hits in %s;y;x", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0))); vh.push_back(h);
+			PBHitsGlobal.push_back((TH2F*)(h=new TH2F(Form("PBHitsGlobal_COLZ_%d", detids[imod]), Form("RecHits in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16)));
+ vh.push_back(h);
+			PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_COLZ_%d", detids[imod]), Form("Hits in %s;y;x", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0)));
+ vh.push_back(h);
 
-			PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
-			PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
-			//PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
-			//PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
+			PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0)));
+ vh.push_back(h);
+			PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0)));
+ vh.push_back(h);
+			//PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0)));
+ vh.push_back(h);
+			//PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0)));
+ vh.push_back(h);
 		} else {
-        	PBHitsGlobal.push_back((TH2F*)(h=new TH2F(Form("PBHitsGlobal_%d", detids[imod]), Form("RecHits in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16))); vh.push_back(h);
-        	PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_%d", detids[imod]), Form("Hits in %s;y;x", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0))); vh.push_back(h);
+        	PBHitsGlobal.push_back((TH2F*)(h=new TH2F(Form("PBHitsGlobal_%d", detids[imod]), Form("RecHits in %s;CMS Global X;CMS Global Y", name(detids[imod]).c_str()), 3200,-16,16, 3200,-16,16)));
+ vh.push_back(h);
+        	PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_%d", detids[imod]), Form("Hits in %s;y;x", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0)));
+ vh.push_back(h);
 
-		    PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
-		    PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
-		    //PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0))); vh.push_back(h);
-		    //PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0))); vh.push_back(h);
+		    PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0)));
+ vh.push_back(h);
+		    PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0)));
+ vh.push_back(h);
+		    //PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0)));
+ vh.push_back(h);
+		    //PBHitCluYDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDx_%d", detids[imod]),  Form("Inactive rechit position (y) and the x residual %s;y;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0)));
+ vh.push_back(h);
 		}
         
-        PBHitEffVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBHitEffVsDel_2mm_%d", detids[imod]),  Form("RecHit efficiency vs Delay in %s;Delay;Efficiency", name(detids[imod]).c_str()), 150, 0, 150))); vh.push_back(h);
-        PBHitEffVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBHitNumberVsDel_%d", detids[imod]),  Form("Num of RecHits vs Delay in %s;Delay;Num of hits", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
-        PBClustersVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBClustersVsDel_num_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
-        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBNumberOfEventsVsDel_den_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
+        PBHitEffVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBHitEffVsDel_2mm_%d", detids[imod]),  Form("RecHit efficiency vs Delay in %s;Delay;Efficiency", name(detids[imod]).c_str()), 150, 0, 150)));
+ vh.push_back(h);
+        PBHitEffVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBHitNumberVsDel_%d", detids[imod]),  Form("Num of RecHits vs Delay in %s;Delay;Num of hits", name(detids[imod]).c_str()), 150,0, 150)));
+ vh.push_back(h);
+        PBClustersVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBClustersVsDel_num_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150)));
+ vh.push_back(h);
+        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBNumberOfEventsVsDel_den_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150)));
+ vh.push_back(h);
         
         hists.push_back(vh);
     }

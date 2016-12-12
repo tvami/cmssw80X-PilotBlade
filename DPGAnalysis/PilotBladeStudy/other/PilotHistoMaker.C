@@ -292,7 +292,7 @@ void clusters(bool saveAll, std::string save_dir, const char* format, TChain* fi
         PBClustersVsDel.push_back((TProfile*)(h=new TProfile(Form("PBClustersVsDel_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150, 0, 100))); vh.push_back(h);
         
         PBClustersVsDel_num.push_back((TH1F*)(h=new TH1F(Form("PBClusterAvgNumVsDel_%d", detids[imod]),  Form("Avg num of clusters per event vs Delay in %s;Delay;Avg num of clusters", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
-        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBCEventNumberVsDel_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
+        PBClustersVsDel_den.push_back((TH1F*)(h=new TH1F(Form("PBEventNumberVsDel_%d", detids[imod]),  Form("Total number of events vs Delay in %s;Delay;num of events", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
         
         PBClusterFEDErrVsDel.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrVsDel_%d", detids[imod]),  Form("Fraction of clusters with FED error vs Delay in %s;Delay;Clusters with FED err", name(detids[imod]).c_str()), 150,0, 150))); vh.push_back(h);
         PBClusterFEDErrType.push_back((TH1F*)(h=new TH1F(Form("PBClusterFEDErrType_%d", detids[imod]),  Form("Fraction of clusters with FED error vs Error type in %s;Error type;Cluster fraction", name(detids[imod]).c_str()), 16, 24.5, 40.5))); vh.push_back(h);    

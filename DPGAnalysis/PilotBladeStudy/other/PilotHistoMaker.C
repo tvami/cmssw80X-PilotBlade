@@ -574,9 +574,9 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
 			PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_COLZ_%d", detids[imod]), Form("Hits in %s;Columns [cm];Rows [cm]", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0)));
  vh.push_back(h);
 
-			PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0)));
+			PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;Rows [cm];dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0)));
  vh.push_back(h);
-			PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0)));
+			PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;Columns [cm];dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0)));
  vh.push_back(h);
 			//PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_COLZ_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0)));
  vh.push_back(h);
@@ -588,9 +588,9 @@ void rechits(bool saveAll, std::string save_dir, const char* format, TChain* fil
         	PBHitsMod.push_back((TH2F*)(h=new TH2F(Form("PBHitsMod_%d", detids[imod]), Form("Hits in %s;Columns [cm];Rows [cm]", name(detids[imod]).c_str()),   416,-4.0,4.0,   160,-1.0,1.0)));
  vh.push_back(h);
 
-		    PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;x;dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0)));
+		    PBHitCluXDx.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDx_%d", detids[imod]),  Form("Inactive rechit position (x) and the x residual %s;Rows [cm];dx [cm]", name(detids[imod]).c_str()), 416,-7.0,7.0, 200,-7.0,7.0)));
  vh.push_back(h);
-		    PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;y;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0)));
+		    PBHitCluYDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluYDy_%d", detids[imod]),  Form("Inactive rechit position (y) and the y residual %s;Columns [cm];dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0)));
  vh.push_back(h);
 		    //PBHitCluXDy.push_back((TH2F*)(h=new TH2F(Form("PBHitCluXDy_%d", detids[imod]),  Form("Inactive rechit position (x) and the y residual %s;x;dy [cm]", name(detids[imod]).c_str()), 160,-7.0,7.0,  200,-7.0,7.0)));
  vh.push_back(h);
